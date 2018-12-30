@@ -2,7 +2,7 @@ const graphql = require('graphql')
 
 // This is how we define object type in graph ql
 
-const { GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql;
+const { GraphQLID ,GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql;
 const _ = require('lodash')
 
 // Now we can define a new type
@@ -38,7 +38,7 @@ const RootQuery = new GraphQLObjectType({
 
 			}
 			*/
-			args: { id: { type: GraphQLString } },
+			args: { id: { type: GraphQLID } },
 			resolve(parent, args) {
 				// Code to get data from db / other source
 				return _.find(books, { id: args.id })
