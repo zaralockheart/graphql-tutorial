@@ -1,3 +1,7 @@
+/**
+ * This file is intended for reference purposes only,
+ * with dummy data (not from server)
+ */
 const graphql = require('graphql')
 
 // This is how we define object type in graph ql
