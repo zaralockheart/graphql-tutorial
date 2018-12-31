@@ -1,13 +1,13 @@
-import { GraphQLList, GraphQLInt, GraphQLID ,GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql'
-import * as _ from 'lodash'
-import { author } from '../entities/author';
-import {getConnection} from "typeorm";
+import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+import { getConnection } from "typeorm";
+import { author } from '../../entities/author';
 
-const AuthorType = new GraphQLObjectType({
+export const AuthorType = new GraphQLObjectType({
 	name: 'Author',
 	fields: () => ({
 		id: { type: GraphQLString },
 		name: { type: GraphQLString },
+		age: { type: GraphQLInt },
 	})
 })
 

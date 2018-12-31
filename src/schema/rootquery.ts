@@ -1,6 +1,6 @@
-import { GraphQLList, GraphQLInt, GraphQLID ,GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql'
-import * as _ from 'lodash'
-import { authorField } from './author';
+import { GraphQLObjectType, GraphQLSchema } from 'graphql';
+import { authorField } from './author/author';
+import { addAuthor } from './author/authormutation';
 import { bookField } from './book';
 
 const rootQuery = new GraphQLObjectType({
@@ -11,6 +11,14 @@ const rootQuery = new GraphQLObjectType({
 	}
 })
 
+const mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+		...addAuthor,
+	}
+})
+
 module.exports = new GraphQLSchema({
-	query: rootQuery
+	query: rootQuery,
+	mutation: mutation
 })

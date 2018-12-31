@@ -1,7 +1,6 @@
-import { GraphQLList, GraphQLInt, GraphQLID ,GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql'
-import * as _ from 'lodash'
-import { book } from '../entities/book';
+import { GraphQLID, GraphQLObjectType, GraphQLString } from 'graphql';
 import { getConnection } from 'typeorm';
+import { book } from '../entities/book';
 
 export const BookType = new GraphQLObjectType({
 	name: 'Book',

@@ -20,6 +20,14 @@ export class author {
     name:string;
         
 
+    @Column("smallint",{ 
+        nullable:true,
+        default: () => "'NULL'",
+        name:"age"
+        })
+    age:number | null;
+        
+
    
     @OneToMany(type=>book, book=>book.author_,{ onDelete: 'CASCADE' ,onUpdate: 'RESTRICT' })
     books:book[];
