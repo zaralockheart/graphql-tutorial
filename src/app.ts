@@ -3,7 +3,7 @@ const graphqlHTTP = require('express-graphql')
 // const schema = require('./schema/schema')
 import "reflect-metadata";
 import {createConnection, Connection} from "typeorm";
-const schema = require('./schema/rootquery');
+const schema = require('./schema/rootschema');
 
 const app = express()
 
