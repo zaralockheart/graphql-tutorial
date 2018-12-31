@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import { authorField } from './author/author';
 import { addAuthor } from './author/authormutation';
-import { bookField } from './book';
+import { bookField } from './book/book';
 
 const rootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',

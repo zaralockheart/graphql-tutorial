@@ -1,6 +1,6 @@
 import { GraphQLID, GraphQLObjectType, GraphQLString } from 'graphql';
 import { getConnection } from 'typeorm';
-import { book } from '../entities/book';
+import { book } from '../../entities/book';
 
 export const BookType = new GraphQLObjectType({
 	name: 'Book',
