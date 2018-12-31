@@ -22,9 +22,9 @@ export const AuthorType = new GraphQLObjectType({
 const getAuthor = async (parent: any, args: any) => {
 
     return await getConnection().manager.createQueryBuilder(author, 'author')
-                                    .leftJoinAndSelect('author.books', 'book')
-                                    .where(`author.id = :id`, {id: args.id})
-                                    .getOne()
+            .leftJoinAndSelect('author.books', 'book')
+            .where(`author.id = :id`, {id: args.id})
+            .getOne()
 
 }
 
@@ -33,5 +33,15 @@ export const authorField = {
         type: AuthorType,
         args: { id: {type: GraphQLID } },
         resolve: getAuthor
+    },
+    authors: {
+        type: GraphQLList(AuthorType),
+        resolve: async (parent: any, args: any) => {
+            return await getConnection()
+                                .manager
+                                .createQueryBuilder(author, 'author')
+                                .leftJoinAndSelect('author.books', 'book')
+                                .getMany()
+        }
     }
 }

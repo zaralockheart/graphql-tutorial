@@ -1,4 +1,4 @@
-import { GraphQLID, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 import { getConnection } from 'typeorm';
 import { book } from '../../entities/book';
 import { AuthorType } from '../author/author';
@@ -32,5 +32,15 @@ export const bookField = {
         type: BookType,
         args: { id: {type: GraphQLID } },
         resolve: getBook
+    },
+    books: {
+        type: GraphQLList(BookType),
+        resolve: async (parent: any, args: any) => {
+            return await getConnection()
+                                .manager
+                                .createQueryBuilder(book, 'book')
+                                .leftJoinAndSelect('book.author_', 'author')
+                                .getMany()
+        }
     }
 }
