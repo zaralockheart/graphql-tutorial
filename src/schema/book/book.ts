@@ -1,6 +1,7 @@
 import { GraphQLID, GraphQLObjectType, GraphQLString } from 'graphql';
 import { getConnection } from 'typeorm';
 import { book } from '../../entities/book';
+import { AuthorType } from '../author/author';
 
 export const BookType = new GraphQLObjectType({
 	name: 'Book',
@@ -9,7 +10,8 @@ export const BookType = new GraphQLObjectType({
 		// reference to other.
 		// One type doesn't know the other type
 		id: { type: GraphQLString },
-		name: { type: GraphQLString },		
+        title: { type: GraphQLString },
+        author: { type: AuthorType}		
 	})
 })
 
