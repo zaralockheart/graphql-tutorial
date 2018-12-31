@@ -2,12 +2,9 @@
  * This file is intended for reference purposes only,
  * with dummy data (not from server)
  */
-const graphql = require('graphql')
-
 // This is how we define object type in graph ql
-
-const { GraphQLList, GraphQLInt, GraphQLID ,GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql;
-const _ = require('lodash')
+import { GraphQLList, GraphQLInt, GraphQLID ,GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql'
+import * as _ from 'lodash'
 
 // Now we can define a new type
 // GraphQLObjectType is a function that accept object

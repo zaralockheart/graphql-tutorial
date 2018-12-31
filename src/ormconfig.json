@@ -1,0 +1,16 @@
+[
+  {
+    "name": "default",
+    "type": "mariadb",
+    "host": "localhost",
+    "port": 3306,
+    "username": "etiqapoc",
+    "password": "Abc@1234",
+    "database": "test",
+    "schema": "true",
+    "synchronize": false,
+    "entities": [
+      "entities/*.js"
+    ]
+  }
+]
