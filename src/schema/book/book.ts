@@ -6,24 +6,25 @@ import { AuthorType } from '../author/author';
 export const BookType = new GraphQLObjectType({
 	name: 'Book',
 	fields: () => ({
-		// The reason this is a function it can
-		// reference to other.
-		// One type doesn't know the other type
 		id: { type: GraphQLString },
         title: { type: GraphQLString },
-        author: { type: AuthorType}		
+        author: { 
+            type: AuthorType,
+            resolve: async (parent, args) => {
+
+                return parent.author_
+            }
+        }		
 	})
 })
 
 const getBook = async (parent: any, args: any) => {
 
-    const bookRepository = await getConnection().manager.getRepository(book)
+    return await getConnection().manager.createQueryBuilder(book, 'book')
+                                    .leftJoinAndSelect('book.author_', 'author')
+                                    .where('book.id = :id', {id: args.id})
+                                    .getOne()
 
-    const bookData = await bookRepository.find({where  : {
-        id: args.id
-    }})
-
-    return bookData[0]
 }
 
 export const bookField = {

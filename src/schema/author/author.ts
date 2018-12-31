@@ -1,27 +1,31 @@
-import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLInt, print, GraphQLList } from 'graphql';
 import { getConnection } from "typeorm";
 import { author } from '../../entities/author';
+import { BookType } from '../book/book';
 
 export const AuthorType = new GraphQLObjectType({
 	name: 'Author',
 	fields: () => ({
 		id: { type: GraphQLString },
 		name: { type: GraphQLString },
-		age: { type: GraphQLInt },
+        age: { type: GraphQLInt },
+        books: {
+            type: GraphQLList(BookType),
+            resolve(parent: any, args: any) {
+                
+                return parent.books
+            }
+        }
 	})
 })
 
 const getAuthor = async (parent: any, args: any) => {
-    const authorQuery = new author()
-            authorQuery.id = args.id
 
-            const authorRepository = await getConnection().manager.getRepository(author)
+    return await getConnection().manager.createQueryBuilder(author, 'author')
+                                    .leftJoinAndSelect('author.books', 'book')
+                                    .where(`author.id = :id`, {id: args.id})
+                                    .getOne()
 
-            const authorData = await authorRepository.find({where  : {
-                id: args.id
-            }})
-
-            return authorData[0]
 }
 
 export const authorField = {
