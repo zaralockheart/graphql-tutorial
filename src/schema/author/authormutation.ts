@@ -9,7 +9,7 @@ export const addAuthor = {
         type: AuthorType,
         args: {
             name: { type: GraphQLString },
-            age: { type: GraphQLInt }, 
+            age: { type: GraphQLInt },
         },
         resolve(parent: any, args: any) {
 
@@ -18,6 +18,6 @@ export const addAuthor = {
             newAuthor.age = args.age
 
             return getConnection().manager.save(newAuthor)
-        }
-    }
+        },
+    },
 }

@@ -4,19 +4,19 @@ import { author } from '../../entities/author';
 import { BookType } from '../book/book';
 
 export const AuthorType = new GraphQLObjectType({
-	name: 'Author',
-	fields: () => ({
-		id: { type: GraphQLString },
-		name: { type: GraphQLString },
+    name: 'Author',
+    fields: () => ({
+        id: { type: GraphQLString },
+        name: { type: GraphQLString },
         age: { type: GraphQLInt },
         books: {
             type: GraphQLList(BookType),
             resolve(parent: any, args: any) {
-                
+
                 return parent.books
-            }
-        }
-	})
+            },
+        },
+    }),
 })
 
 const getAuthor = async (parent: any, args: any) => {
@@ -32,7 +32,7 @@ export const authorField = {
     author: {
         type: AuthorType,
         args: { id: {type: GraphQLID } },
-        resolve: getAuthor
+        resolve: getAuthor,
     },
     authors: {
         type: GraphQLList(AuthorType),
@@ -42,6 +42,6 @@ export const authorField = {
                                 .createQueryBuilder(author, 'author')
                                 .leftJoinAndSelect('author.books', 'book')
                                 .getMany()
-        }
-    }
+        },
+    },
 }

@@ -1,4 +1,4 @@
-const express = require('express') 
+const express = require('express')
 const graphqlHTTP = require('express-graphql')
 // const schema = require('./schema/schema')
 import "reflect-metadata";
@@ -10,15 +10,15 @@ const app = express()
 createConnection().then(async (connection: Connection) => {
 	if (connection.isConnected) {
 		console.log("Db is connected")
-	} else {		
+	} else {
 		console.log("Db is not connected")
 	}
 }).catch(error => console.log(error));
 
 app.use('/graphql', graphqlHTTP({
+	graphiql: true,
 	schema,
-	graphiql: true
-}))	
+}))
 
 app.listen(4000, () => {
 	console.log('now you are listening for request on port 4000')
