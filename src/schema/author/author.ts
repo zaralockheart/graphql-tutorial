@@ -2,6 +2,7 @@ import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLInt, print, GraphQL
 import { getConnection } from "typeorm";
 import { author } from '../../entities/author';
 import { BookType } from '../book/book';
+import { getConnectionManagerInstance } from '../../util/connectionmanager';
 
 export const AuthorType = new GraphQLObjectType({
     name: 'Author',
@@ -21,7 +22,7 @@ export const AuthorType = new GraphQLObjectType({
 
 const getAuthor = async (parent: any, args: any) => {
 
-    return await getConnection().manager.createQueryBuilder(author, 'author')
+    return await getConnectionManagerInstance().createQueryBuilder(author, 'author')
             .leftJoinAndSelect('author.books', 'book')
             .where(`author.id = :id`, {id: args.id})
             .getOne()
@@ -37,8 +38,7 @@ export const authorField = {
     authors: {
         type: GraphQLList(AuthorType),
         resolve: async (parent: any, args: any) => {
-            return await getConnection()
-                                .manager
+            return await getConnectionManagerInstance()
                                 .createQueryBuilder(author, 'author')
                                 .leftJoinAndSelect('author.books', 'book')
                                 .getMany()

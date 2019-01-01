@@ -1,10 +1,10 @@
 {
-   "type": "mysql",
+   "type": "mariadb",
    "host": "localhost",
    "port": 3306,
-   "username": "etiqapoc",
-   "password": "Abc@1234",
-   "database": "test",
+   "username": "usernmae",
+   "password": "password",
+   "database": "database_name",
    "synchronize": false,
    "logging": false,
    "entities": [

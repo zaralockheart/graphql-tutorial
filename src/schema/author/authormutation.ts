@@ -3,6 +3,7 @@ import { GraphQLString, GraphQLInt } from 'graphql';
 import { getConnection } from 'typeorm';
 import { author } from '../../entities/author';
 import { AuthorType } from './author';
+import { getConnectionManagerInstance } from '../../util/connectionmanager';
 
 export const addAuthor = {
     addAuthor: {
@@ -17,7 +18,7 @@ export const addAuthor = {
             newAuthor.name = args.name
             newAuthor.age = args.age
 
-            return getConnection().manager.save(newAuthor)
+            return getConnectionManagerInstance().save(newAuthor)
         },
     },
 }

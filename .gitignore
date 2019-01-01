@@ -4,3 +4,7 @@ node_modules/
 build/
 tmp/
 temp/
+
+ormconfig.json
+
+src/ormconfig.json
